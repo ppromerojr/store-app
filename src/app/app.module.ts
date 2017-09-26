@@ -19,6 +19,8 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CategorytService } from './pages/products/shared/category.cervice';
 import { ProductService } from './pages/products/shared/product.service';
 import { UsersComponent } from './pages/users/users.component';
+import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { UsersComponent } from './pages/users/users.component';
     DashboardComponent,
     LoginComponent,
     ProductsComponent,
-    UsersComponent
+    UsersComponent,
+    AdminProductsComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

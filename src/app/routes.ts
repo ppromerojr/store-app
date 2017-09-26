@@ -1,3 +1,4 @@
+import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { UsersComponent } from './pages/users/users.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginComponent } from './pages/login/login.component';
@@ -10,5 +11,6 @@ export const routes: Routes = [
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'all-products', component: ProductsComponent },
-    { path: 'users', component: UsersComponent }
+    { path: 'users', component: UsersComponent },
+    { path: 'products/admin', component: AdminProductsComponent }
 ];

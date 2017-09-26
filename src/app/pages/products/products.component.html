@@ -1,45 +1,40 @@
 <div class="product-container">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-8">Categories</div>
-                <div class="col-xs-2 text-center">Total Products</div>
-                <div class="col-xs-2 text-center">Expand All</div>
-            </div>
-        </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-8">Categories</div>
+        <div class="col-xs-2 text-center">Total Products</div>
+        <div class="col-xs-2 text-center">Expand All</div>
+      </div>
     </div>
-    <div class="panel panel-default" *ngFor="let category of categories">
+  </div>
+  <div class="panel panel-default" *ngFor="let category of categories">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-xs-8">{{category.name}}</div>
+        <div class="col-xs-2 text-center">2</div>
+        <div class="col-xs-2 text-center"><i class="pe-7s-angle-down"></i></div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div class="panel panel-info">
         <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-8">{{category.name}}</div>
-                <div class="col-xs-2 text-center">2</div>
-                <div class="col-xs-2 text-center"><i class="pe-7s-angle-down"></i></div>
-            </div>
+          <div class="row">
+            <div class="col-xs-8">Product Name</div>
+            <div class="col-xs-2 text-center"></div>
+            <div class="col-xs-2 text-center"><i class="pe-7s-angle-down"></i></div>
+          </div>
         </div>
         <div class="panel-body">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-xs-8">Product Name</div>
-                        <div class="col-xs-2 text-center"></div>
-                        <div class="col-xs-2 text-center"><i class="pe-7s-angle-down"></i></div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <div *ngFor="let product of products">
-                        <div class="row">
-                            <div class="col-xs-6">{{category.name}}</div>
-                            <div class="col-xs-3 text-center">500</div>
-                            <div class="col-xs-3 text-center">5</div>
-                        </div>
-                    </div>
-                </div>
+          <div *ngFor="let product of products">
+            <div class="row">
+              <div class="col-xs-6">{{category.name}}</div>
+              <div class="col-xs-3 text-center">500</div>
+              <div class="col-xs-3 text-center">5</div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
-<p>
-  products works! updates from Felix 1113444
-</p>
