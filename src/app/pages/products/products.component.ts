@@ -12,24 +12,33 @@ import { SharedService } from '../../providers/shared.service';
 export class ProductsComponent implements OnInit {
   categories:any[];
   products:any[];
-  constructor(private categoryService: CategorytService, private productServices: ProductService,
-    private shared: SharedService
-  ) { 
-      // this.categories = this.categoryService.getCategory();
-      
-      // this.products = this.categoryService.getCategory();
+  isExpandAll: boolean = false;
+  constructor(private shared: SharedService) { 
+
   }
 
   ngOnInit() {
     this._getCategory();
-   }
+    this._getProduct();
+  }
 
   _getCategory(){
     this.shared._getData('categories')
     .subscribe((res) => {
-      console.log(res);
-      this.categories = res;
+      this.categories = res.data;
     })
+  }
+
+  _getProduct(){
+    this.shared._getData('products')
+    .subscribe((res) => {
+      this.products = res.data;
+    })
+  }
+
+  expandAll() {
+    console.log('test')
+    this.isExpandAll = true
   }
 
 }
