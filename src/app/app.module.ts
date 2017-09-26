@@ -16,6 +16,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { routes } from './routes';
 import { LoginComponent } from './pages/login/login.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ProductsComponent } from './pages/products/products.component';
     SidebarComponent,
     DashboardComponent,
     LoginComponent,
-    ProductsComponent
+    ProductsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
