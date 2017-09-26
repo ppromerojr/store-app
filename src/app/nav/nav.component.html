@@ -20,14 +20,14 @@
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                  Welcome
+                                  Welcome {{ shared._currentUser().username }}
                                   <b class="caret"></b>
                             </a>
           <ul class="dropdown-menu">
             <li><a href="#">Edit Profile</a></li>
 
             <li class="divider"></li>
-            <li><a href="#">Logout</a></li>
+            <li><a [routerLink]="['/login']">Logout</a></li>
           </ul>
         </li>
 
