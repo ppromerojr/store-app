@@ -9,8 +9,8 @@ import { ProductsComponent } from './pages/products/products.component';
 export const routes: Routes = [
     { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: 'login', component: LoginComponent },
-    { path: 'all-products', component: ProductsComponent },
-    { path: 'users', component: UsersComponent },
-    { path: 'products/admin', component: AdminProductsComponent }
+    { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+    { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+    { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
+    { path: 'admin', component: AdminProductsComponent, canActivate: [AuthGuard] }
 ];
