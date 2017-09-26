@@ -18,6 +18,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { ProductsComponent } from './pages/products/products.component';
 import { CategorytService } from './pages/products/shared/category.cervice';
 import { ProductService } from './pages/products/shared/product.service';
+import { UsersComponent } from './pages/users/users.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ProductService } from './pages/products/shared/product.service';
     SidebarComponent,
     DashboardComponent,
     LoginComponent,
-    ProductsComponent
+    ProductsComponent,
+    UsersComponent
   ],
   imports: [
     BrowserModule,
