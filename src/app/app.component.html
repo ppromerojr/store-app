@@ -1,9 +1,8 @@
-<div class="wrapper">
-  <app-sidebar></app-sidebar>
+<div class="wrapper wrapper-full-page ">
   <div class="main-panel">
-    <app-nav></app-nav>
+    <app-nav *ngIf="auth.authenticateUser()"></app-nav>
     <router-outlet></router-outlet>
-    <app-footer></app-footer>
+    <app-footer *ngIf="auth.authenticateUser()"></app-footer>
 
   </div>
 </div>
