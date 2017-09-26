@@ -16,6 +16,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { routes } from './routes';
 import { LoginComponent } from './pages/login/login.component';
 import { ProductsComponent } from './pages/products/products.component';
+import { CategorytService } from './pages/products/shared/category.cervice';
+import { ProductService } from './pages/products/shared/product.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { ProductsComponent } from './pages/products/products.component';
   providers: [
     SharedService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    CategorytService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
