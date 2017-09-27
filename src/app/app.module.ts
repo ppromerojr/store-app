@@ -28,6 +28,8 @@ import { AdminEditProductComponent } from './pages/admin-edit-product/admin-edit
 import { SortPipe } from './pipes/sort.pipe';
 import { AdminAddProductComponent } from './pages/admin-add-product/admin-add-product.component';
 import { AdminCategoriesComponent } from './pages/admin-categories/admin-categories.component';
+import { AccordionModule } from "ng2-accordion";
+import { ProductDetailsComponent } from './pages/products/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { AdminCategoriesComponent } from './pages/admin-categories/admin-categor
     AdminEditProductComponent,
     SortPipe,
     AdminAddProductComponent,
-    AdminCategoriesComponent
+    AdminCategoriesComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ import { AdminCategoriesComponent } from './pages/admin-categories/admin-categor
     FormsModule,
     RouterModule.forRoot(routes),
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
+    AccordionModule
   ],
   providers: [
     SharedService,

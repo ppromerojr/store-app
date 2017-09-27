@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { CategorytService } from './shared/category.cervice';
 import { ProductService } from './shared/product.service';
 import { SharedService } from '../../providers/shared.service';
@@ -13,13 +13,15 @@ export class ProductsComponent implements OnInit {
   categories:any[];
   products:any[];
   isExpandAll: boolean = false;
-  constructor(private shared: SharedService) { 
+  filterByCategory: string; 
+  selectedData;
 
+  constructor(private shared: SharedService) { 
+    
   }
 
   ngOnInit() {
     this._getCategory();
-    this._getProduct();
   }
 
   _getCategory(){
@@ -29,16 +31,15 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  _getProduct(){
+  onSelect(val){
     this.shared._getData('products')
-    .subscribe((res) => {
-      this.products = res.data;
+      .subscribe((res) => {
+        this.selectedData = res.data.filter(getProduct => getProduct.id == val)
     })
   }
 
-  expandAll() {
-    console.log('test')
-    this.isExpandAll = true
+  expandAll(){
+    this.isExpandAll = !this.isExpandAll;
   }
 
 }

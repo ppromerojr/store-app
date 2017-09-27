@@ -1,40 +1,53 @@
-<div class="product-container">
+<div class="container product-container">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <div class="row">
         <div class="col-xs-8">Categories</div>
         <div class="col-xs-2 text-center">Total Products</div>
-        <div class="col-xs-2 text-center" (click)="expandAll()">Expand All</div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="panel panel-default" *ngFor="let category of categories">
-  <div class="panel-heading">
-    <div class="row">
-      <div class="col-xs-8">{{category.name}}</div>
-      <div class="col-xs-2 text-center">2</div>
-      <div class="col-xs-2 text-center"><i class="pe-7s-angle-down"></i></div>
-    </div>
-  </div>
-  <div class="panel-body">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <div class="row">
-          <div class="col-xs-8">Product Name</div>
-          <div class="col-xs-2 text-center"></div>
-          <div class="col-xs-2 text-center"><i class="pe-7s-angle-down"></i></div>
+        <div class="col-xs-2 text-center" (click)="expandAll()">
+          <span *ngIf="!isExpandAll">Expand All</span>
+          <span *ngIf="isExpandAll">Hide All</span>
         </div>
       </div>
-      <div class="panel-body">
-        <div *ngFor="let product of products">
+    </div>
+  </div>
+  <div class="panel panel-default" *ngFor="let category of categories">
+    <accordion [showArrows]="false" [closeOthers]="true" [expandAll]="false">
+      <accordion-group>
+        <accordion-heading>
+          <div class="panel-heading">
+            <div class="row">
+              <div class="col-xs-8"><a [routerLink]="['/products', category.id]">{{category.name}}</a></div>
+              <div class="col-xs-2 text-center">1</div>
+              <accordion-toggle>
+                <div class="col-xs-2 text-center" [class.active]="onSelect(category.id)" (click)="onSelect(category.id)">V</div>
+              </accordion-toggle>
+            </div>
+          </div>
+        </accordion-heading>
+        <div class="panel-body" *ngIf="!isExpandAll">
           <div class="row">
-            <div class="col-xs-6">{{category.name}}</div>
-            <div class="col-xs-3 text-center">500</div>
-            <div class="col-xs-3 text-center">5</div>
+            <div class="col-md-12">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <div class="row">
+                    <div class="col-xs-6">Product Name</div>
+                    <div class="col-xs-3 text-center">Price</div>
+                    <div class="col-xs-3 text-center">Stock Available</div>
+                  </div>
+                </div>
+                <div class="panel-body">
+                  <div class="row" *ngFor="let product of selectedData">
+                    <div class="col-xs-6"><a [routerLink]="['/products', product.id]">{{product?.name}}</a></div>
+                    <div class="col-xs-3 text-center">{{product?.price | currency:'USD':true:'1.2-2'}}</div>
+                    <div class="col-xs-3 text-center">{{product?.stocks}}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </accordion-group>
+    </accordion>
   </div>
 </div>
