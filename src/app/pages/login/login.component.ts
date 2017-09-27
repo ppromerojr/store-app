@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
             this.userDetails['isAdmin'] = user.isAdmin;
             localStorage.setItem('currentUser', JSON.stringify(this.userDetails));
             this.router.navigate([this.returnUrl]);
-          } else {
-
           }
         })
 

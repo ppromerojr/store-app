@@ -6,6 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
+import { Modal, BSModalContext } from 'angular2-modal/plugins/bootstrap';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap';
+import { ModalModule } from 'angular2-modal';
+
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,7 +24,10 @@ import { CategorytService } from './pages/products/shared/category.cervice';
 import { ProductService } from './pages/products/shared/product.service';
 import { UsersComponent } from './pages/users/users.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
-import { ModalComponent } from './modal/modal.component';
+import { AdminEditProductComponent } from './pages/admin-edit-product/admin-edit-product.component';
+import { SortPipe } from './pipes/sort.pipe';
+import { AdminAddProductComponent } from './pages/admin-add-product/admin-add-product.component';
+import { AdminCategoriesComponent } from './pages/admin-categories/admin-categories.component';
 
 @NgModule({
   declarations: [
@@ -34,13 +41,18 @@ import { ModalComponent } from './modal/modal.component';
     ProductsComponent,
     UsersComponent,
     AdminProductsComponent,
-    ModalComponent
+    AdminEditProductComponent,
+    SortPipe,
+    AdminAddProductComponent,
+    AdminCategoriesComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    ModalModule.forRoot(),
+    BootstrapModalModule
   ],
   providers: [
     SharedService,
