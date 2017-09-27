@@ -2,3 +2,9 @@
 i { font-size: 30px }
 .panel.panel-default { margin-bottom: 0; border-radius: 0px; }
 .panel-info .panel-heading row { height: 20px; }
+.caret { 
+    border-top: 7px dashed;
+    border-right: 7px solid transparent;
+    border-left: 7px solid transparent; 
+}
+.panel-title { position: relative }

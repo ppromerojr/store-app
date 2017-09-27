@@ -19,6 +19,8 @@ import { ProductsComponent } from './pages/products/products.component';
 import { CategorytService } from './pages/products/shared/category.cervice';
 import { ProductService } from './pages/products/shared/product.service';
 import { UsersComponent } from './pages/users/users.component';
+import {AccordionModule} from "ng2-accordion";
+import { ProductDetailsComponent } from './pages/products/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -30,12 +32,14 @@ import { UsersComponent } from './pages/users/users.component';
     DashboardComponent,
     LoginComponent,
     ProductsComponent,
-    UsersComponent
+    UsersComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
+    AccordionModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
