@@ -1,0 +1,54 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Products</h4>
+            <p class="category">List of Products</p>
+          </div>
+          <div class="content table-responsive table-full-width">
+            <table class="table table-hover table-striped">
+              <thead>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Available Stocks</th>
+                <th>Options</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products">
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.categoryId }}</td>
+                  <td>{{ product.price }}</td>
+                  <td>{{ product.stocks }}</td>
+                  <td>
+                    <span class="btn btn-primary" (click)="modal1.show(product)"><i class="pe-7s-edit"></i></span>
+                    <span class="btn btn-danger"><i class="pe-7s-trash"></i></span>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-modal #modal1>
+  <div class="app-modal-header">
+  </div>
+  <div class="app-modal-body">
+    Whatever content you like, form fields, anything
+    <input type="text">
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-default" (click)="modal1.hide()">Close</button>
+    <button type="button" class="btn btn-default" (click)="modal2.show()">Show modal 2</button>
+    <button type="button" class="btn btn-primary">Save changes</button>
+  </div>
+</app-modal>
