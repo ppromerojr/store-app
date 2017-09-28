@@ -1,6 +1,6 @@
 import { SharedService } from './../../providers/shared.service';
 import { Icategory } from './../../providers/icategory';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-admin-categories',
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-categories.component.css']
 })
 export class AdminCategoriesComponent implements OnInit {
-
+  @ViewChild('close') close: ElementRef;
   categories: Icategory[] = [{
     id: 0,
     name: ''
@@ -68,6 +68,7 @@ export class AdminCategoriesComponent implements OnInit {
       .subscribe((res) => {
         console.log(res);
         this._getCategories();
+        this._close();
       });
 
     this.addRow = 0;
@@ -97,8 +98,9 @@ export class AdminCategoriesComponent implements OnInit {
     this.shared._postData(category, 'categories')
       .subscribe((res) => {
         console.log(res);
+        this._getCategories();
       });
-    this._getCategories();
+
 
 
     this.isAdd = false;
@@ -110,5 +112,9 @@ export class AdminCategoriesComponent implements OnInit {
     this.isDraft = true;
   }
 
+  _close() {
+    let el: HTMLElement = this.close.nativeElement as HTMLElement;
+    el.click();
+  }
 
 }

@@ -2,7 +2,7 @@ import { AdminProductsComponent } from './../admin-products/admin-products.compo
 import { Iproduct } from './../../providers/iproduct';
 import { Icategory } from './../../providers/icategory';
 import { SharedService } from './../../providers/shared.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-admin-add-product',
@@ -10,8 +10,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-add-product.component.css']
 })
 export class AdminAddProductComponent implements OnInit {
-
-  categories: Icategory;
+  @ViewChild('close') close: ElementRef;
+  isSucess: boolean = false;
+  categories: Icategory[] = [{
+    id: 0,
+    name: ''
+  }];
   productData: Iproduct = {
     name: '',
     categoryId: 0,
@@ -41,7 +45,16 @@ export class AdminAddProductComponent implements OnInit {
     this.shared._postData(this.productData, 'products')
       .subscribe((res) => {
         this.products._getProducts();
+        this.isSucess = true;
+        this._close();
+        this.productData = {};
+
       })
+  }
+
+  _close() {
+    let el: HTMLElement = this.close.nativeElement as HTMLElement;
+    el.click();
   }
 
 }

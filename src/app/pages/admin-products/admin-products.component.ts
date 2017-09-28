@@ -1,5 +1,5 @@
 import { AdminAddProductComponent } from './../admin-add-product/admin-add-product.component';
-import { Component, ViewChild, OnInit, ViewContainerRef, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, OnInit, ViewContainerRef, ViewEncapsulation, ElementRef } from '@angular/core';
 import { Iproduct } from './../../providers/iproduct';
 import { Icategory } from './../../providers/icategory';
 import { SharedService } from './../../providers/shared.service';
@@ -10,7 +10,7 @@ import { SharedService } from './../../providers/shared.service';
   styleUrls: ['./admin-products.component.css']
 })
 export class AdminProductsComponent implements OnInit {
-
+  @ViewChild('close') close: ElementRef;
   products: Iproduct = {
     id: 0,
     name: '',
@@ -62,7 +62,14 @@ export class AdminProductsComponent implements OnInit {
     this.shared._deleteData(this.selectedProduct, 'products')
       .subscribe((res) => {
         console.log(res);
+        this._getProducts();
+        this._close();
       })
+  }
+
+  _close() {
+    let el: HTMLElement = this.close.nativeElement as HTMLElement;
+    el.click();
   }
 
 

@@ -7,7 +7,7 @@
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-      <a class="navbar-brand">MyStore</a>
+      <a [routerLink]="['/dashboard']" class="navbar-brand">MyStore</a>
     </div>
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-left">
@@ -35,9 +35,12 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <a href="">
+          <a [ngClass]="{'fade-out' : isSearch}" (click)="isSearch=true">
                      <i class="fa fa-search"></i>
                  </a>
+          <span class="input-search" *ngIf="isSearch">
+              <input type="text" class="form-control" placeholder="product">
+          </span>
         </li>
         <li>
           <div class="toggleWrapper">
@@ -49,7 +52,7 @@
 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <!-- Welcome <strong>{{ shared._currentUser().username }}</strong> -->
+            Welcome <strong>{{ shared._currentUser().username }}</strong>
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu">

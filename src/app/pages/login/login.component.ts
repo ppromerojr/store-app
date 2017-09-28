@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   userDetails = {};
 
   loading: boolean = false;
+  isError: boolean = false;
   returnUrl: string;
 
   constructor(
@@ -37,21 +38,28 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+
+
     this.loading = true;
     this.shared._getData('users')
       .subscribe((res) => {
-        console.log(this.userData);
+
         let users = res.data;
 
         users.find((user) => {
+          console.log('exists 1');
           if ((user.username === this.userData.username) && (user.password === this.userData.password)) {
-            console.log('exists');
+
             this.userDetails['firstName'] = user.firstName;
             this.userDetails['lastName'] = user.lastName;
             this.userDetails['username'] = user.username;
             this.userDetails['isAdmin'] = user.isAdmin;
             localStorage.setItem('currentUser', JSON.stringify(this.userDetails));
             this.router.navigate([this.returnUrl]);
+            this.isError = false;
+          } else {
+            console.log('doesnt exists');
+            this.isError = true;
           }
         })
 

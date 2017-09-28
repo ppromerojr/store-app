@@ -13,11 +13,11 @@ export const routes: Routes = [
     { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
-    { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+    { path: 'products', component: ProductsComponent },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard] },
     { path: 'products/manage', component: AdminProductsComponent, canActivate: [AuthGuard] },
     { path: 'categories/manage', component: AdminCategoriesComponent, canActivate: [AuthGuard] },
-    { path: 'products', component: ProductsComponent },
+
     { path: 'products/:id', component: ProductDetailsComponent },
-    { path: 'users', component: UsersComponent }
+    // { path: 'users', component: UsersComponent }
 ];
