@@ -6,6 +6,20 @@
           <div class="header">
             <h4 class="title">Products</h4>
             <p class="category">List of Products</p>
+            <!-- 
+            <div class="form-group">
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search By Category" />
+              </div>
+            </div> -->
+
+            <div class="CustomButton">
+              <select class="form-control" [(ngModel)]="catName" id="">
+                <option value=""></option>    
+                <option [value]="category.id" *ngFor="let category of categories" class="dropdown-item" >{{ category.name }}</option>
+                </select>
+            </div>
+
           </div>
           <div class="content table-responsive table-full-width">
 
@@ -25,17 +39,23 @@
 
             <table *ngIf="products.length" class="table table-hover table-striped">
               <thead>
-                <th>Name</th>
-                <th>Category</th>
-                <th>Price</th>
-                <th>Available Stocks</th>
+                <th (click)="sort('name')">Name <i class="fa" [ngClass]="{'fa-sort': column != 'name', 'fa-sort-asc': (column == 'name' && isDesc), 'fa-sort-desc': (column == 'name' && !isDesc) }"
+                    aria-hidden="true"> </i></th>
+                <th (click)="sort('name')">Category
+
+
+                </th>
+                <th (click)="sort('price')">Price <i class="fa" [ngClass]="{'fa-sort': column != 'price', 'fa-sort-asc': (column == 'price' && isDesc), 'fa-sort-desc': (column == 'price' && !isDesc) }"
+                    aria-hidden="true"> </i></th>
+                <th (click)="sort('stocks')">Available Stocks <i class="fa" [ngClass]="{'fa-sort': column != 'stocks', 'fa-sort-asc': (column == 'stocks' && isDesc), 'fa-sort-desc': (column == 'stocks' && !isDesc) }"
+                    aria-hidden="true"> </i></th>
                 <th>Options</th>
               </thead>
               <tbody *ngIf="products.length">
-                <tr *ngFor="let product of products; let i = index">
+                <tr *ngFor="let product of products | searchCategory: searchText | orderBy: {property: column, direction: direction} | filterby: {term: catName,products: products}">
                   <td>{{ product.name }} </td>
-                  <td>{{ (product.categoryId) }}</td>
-                  <td>{{ product.price }}</td>
+                  <td>{{ product.categoryId | category: categories }}</td>
+                  <td>{{ product.price | currency : {currencyFormat: currency, currencyValue: currencyValue} }}</td>
                   <td>{{ product.stocks }}</td>
                   <td>
 
@@ -85,5 +105,4 @@
 <div *ngIf="isModal">
   <app-admin-edit-product [prod]="selectedProduct"></app-admin-edit-product>
   <app-admin-add-product></app-admin-add-product>
-
 </div>

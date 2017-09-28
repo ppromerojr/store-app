@@ -1,3 +1,6 @@
+import { NavComponent } from './../../nav/nav.component';
+import { SearchCategoryPipe } from './../../pipes/search-category.pipe';
+import { OrderbyPipe } from './../../pipes/orderby.pipe';
 import { AdminAddProductComponent } from './../admin-add-product/admin-add-product.component';
 import { Component, ViewChild, OnInit, ViewContainerRef, ViewEncapsulation, ElementRef } from '@angular/core';
 import { Iproduct } from './../../providers/iproduct';
@@ -8,9 +11,12 @@ import { SharedService } from './../../providers/shared.service';
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
+
 })
 export class AdminProductsComponent implements OnInit {
   @ViewChild('close') close: ElementRef;
+  @ViewChild('checkbox') checkbox: NavComponent;
+
   products: Iproduct = {
     id: 0,
     name: '',
@@ -25,20 +31,34 @@ export class AdminProductsComponent implements OnInit {
     price: '',
     stocks: ''
   }
-  categories: Icategory = {
-    id: 0,
-    name: ''
-  }
+  categories: Icategory[] = [
+    {
+      id: 0,
+      name: ''
+    }
+  ]
   isAdd: boolean = false;
   isEdit: boolean = false;
+  filterby: string = 'all';
+
+  records: Array<any>;
+  isDesc: boolean = false;
+  column: string = '';
+  direction: number;
+
   constructor(
     private shared: SharedService
   ) { }
 
+  currency: string = 'PH';
+  currencyValue = '50.97';
+
   ngOnInit() {
     this._getProducts();
     this._getCategories();
+    console.log(this.currency);
     // this._getCategoryName(1);
+    console.log(this.checkbox);
   }
 
   _getProducts() {
@@ -71,6 +91,16 @@ export class AdminProductsComponent implements OnInit {
     let el: HTMLElement = this.close.nativeElement as HTMLElement;
     el.click();
   }
+
+  sort(property) {
+    this.isDesc = !this.isDesc; //change the direction    
+    this.column = property;
+    this.direction = this.isDesc ? 1 : -1;
+  };
+
+
+
+
 
 
 

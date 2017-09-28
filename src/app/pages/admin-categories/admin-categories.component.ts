@@ -1,6 +1,7 @@
 import { SharedService } from './../../providers/shared.service';
 import { Icategory } from './../../providers/icategory';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin-categories',
@@ -24,9 +25,24 @@ export class AdminCategoriesComponent implements OnInit {
   isError: boolean = false;
   isDraft: boolean = false;
   addRow = 0;
+  selCategory = {};
+
+  productForm: FormGroup;
+  name: FormControl;
+  id: FormControl;
 
   ngOnInit() {
     this._getCategories();
+    this.name = new FormControl(
+      '',
+      [
+        Validators.required
+      ]
+    );
+
+    this.productForm = new FormGroup({
+      name: this.name,
+    });
   }
 
   _getCategories() {
@@ -48,16 +64,20 @@ export class AdminCategoriesComponent implements OnInit {
   }
 
   _editCategory(category) {
-    console.log(category.id);
+    console.log(category.name);
     this.selectedCategory = category.id;
   }
 
 
-  _updateCategory(category) {
-    console.log(category);
-    this.shared._putData(category, 'categories')
+  _updateCategory(productForm) {
+    let updatedProduct = {};
+    updatedProduct['id'] = this.selectedCategory;
+    updatedProduct['name'] = productForm.name;
+    console.log(updatedProduct);
+    this.shared._putData(updatedProduct, 'categories')
       .subscribe((res) => {
-        console.log(res);
+        this._getCategories();
+        updatedProduct = {};
       });
     this.selectedCategory = {};
   }
@@ -93,9 +113,9 @@ export class AdminCategoriesComponent implements OnInit {
 
   }
 
-  _addProduct(category) {
-    console.log(category);
-    this.shared._postData(category, 'categories')
+  _addProduct(productForm) {
+    console.log(productForm);
+    this.shared._postData(productForm, 'categories')
       .subscribe((res) => {
         console.log(res);
         this._getCategories();

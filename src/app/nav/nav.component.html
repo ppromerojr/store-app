@@ -16,7 +16,7 @@
                    All Products
                 </a>
         </li>
-        <li class="dropdown">
+        <li class="dropdown" *ngIf="shared._currentUser().isAdmin">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                         Manage Store
                         <b class="caret"></b>
@@ -24,8 +24,6 @@
           <ul class="dropdown-menu">
             <li><a [routerLink]="['/categories/manage']">Categories</a></li>
             <li><a [routerLink]="['/products/manage']">Products</a></li>
-
-
           </ul>
         </li>
 
@@ -38,14 +36,14 @@
           <a [ngClass]="{'fade-out' : isSearch}" (click)="isSearch=true">
                      <i class="fa fa-search"></i>
                  </a>
-          <span class="input-search" *ngIf="isSearch">
-              <input type="text" class="form-control" placeholder="product">
+          <span [ngClass]="{'fade-in' : isSearch}" class="input-search" *ngIf="isSearch">
+              <input (blur)="toggleSearchIcon()" autofocus type="text" class="form-control" placeholder="product">
           </span>
         </li>
         <li>
           <div class="toggleWrapper">
-            <input type="checkbox" id="dn" class="dn">
-            <label for="dn" class="toggle"><span class="toggle__handler"></span></label>
+            <input #checkbox type="checkbox" id="dn" class="dn">
+            <label (click)="_changeCurrency()" for="dn" class="toggle"><span class="toggle__handler"></span></label>
           </div>
 
         </li>

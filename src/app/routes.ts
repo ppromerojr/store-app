@@ -1,3 +1,4 @@
+import { AdminGuard } from './guards/admin.guard';
 import { AdminCategoriesComponent } from './pages/admin-categories/admin-categories.component';
 import { AdminProductsComponent } from './pages/admin-products/admin-products.component';
 import { UsersComponent } from './pages/users/users.component';
