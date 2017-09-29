@@ -39,6 +39,7 @@ import { OrderbyPipe } from './pipes/orderby.pipe';
 import { SearchCategoryPipe } from './pipes/search-category.pipe';
 import { FilterbyPipe } from './pipes/filterby.pipe';
 import { CurrencyPipe } from './pipes/currency.pipe';
+import { CurrencyComponent } from './currency/currency.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { CurrencyPipe } from './pipes/currency.pipe';
     OrderbyPipe,
     SearchCategoryPipe,
     FilterbyPipe,
-    CurrencyPipe
+    CurrencyPipe,
+    CurrencyComponent
   ],
   imports: [
     BrowserModule,

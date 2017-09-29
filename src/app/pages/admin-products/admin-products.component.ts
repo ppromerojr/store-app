@@ -2,7 +2,7 @@ import { NavComponent } from './../../nav/nav.component';
 import { SearchCategoryPipe } from './../../pipes/search-category.pipe';
 import { OrderbyPipe } from './../../pipes/orderby.pipe';
 import { AdminAddProductComponent } from './../admin-add-product/admin-add-product.component';
-import { Component, ViewChild, OnInit, ViewContainerRef, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewChild, OnInit, ViewContainerRef, ViewEncapsulation, ElementRef, EventEmitter } from '@angular/core';
 import { Iproduct } from './../../providers/iproduct';
 import { Icategory } from './../../providers/icategory';
 import { SharedService } from './../../providers/shared.service';
@@ -10,7 +10,8 @@ import { SharedService } from './../../providers/shared.service';
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
-  styleUrls: ['./admin-products.component.css']
+  styleUrls: ['./admin-products.component.css'],
+  outputs: ['onNewEntryAdded']
 
 })
 export class AdminProductsComponent implements OnInit {
@@ -53,13 +54,24 @@ export class AdminProductsComponent implements OnInit {
   currency: string = 'PH';
   currencyValue = '50.97';
 
+  // Input
+  public newObject: string;
+  //@Output()
+  public onNewEntryAdded = new EventEmitter();
+
   ngOnInit() {
     this._getProducts();
     this._getCategories();
     console.log(this.currency);
-    // this._getCategoryName(1);
-    console.log(this.checkbox);
+    // this._getCategoryName(1); 
   }
+
+  _changeCurrency(event): void {
+    this.onNewEntryAdded.emit({
+      value: this.newObject
+    })
+  }
+
 
   _getProducts() {
     this.shared._getData('products')
@@ -96,7 +108,9 @@ export class AdminProductsComponent implements OnInit {
     this.isDesc = !this.isDesc; //change the direction    
     this.column = property;
     this.direction = this.isDesc ? 1 : -1;
-  };
+  }
+
+
 
 
 

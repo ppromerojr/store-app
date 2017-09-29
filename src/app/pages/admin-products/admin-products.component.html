@@ -41,8 +41,9 @@
               <thead>
                 <th (click)="sort('name')">Name <i class="fa" [ngClass]="{'fa-sort': column != 'name', 'fa-sort-asc': (column == 'name' && isDesc), 'fa-sort-desc': (column == 'name' && !isDesc) }"
                     aria-hidden="true"> </i></th>
-                <th (click)="sort('name')">Category
-
+                <th (click)="sort('category')">Category
+                  <i class="fa" [ngClass]="{'fa-sort': column != 'category', 'fa-sort-asc': (column == 'category' && isDesc), 'fa-sort-desc': (column == 'category' && !isDesc) }"
+                    aria-hidden="true"> </i>
 
                 </th>
                 <th (click)="sort('price')">Price <i class="fa" [ngClass]="{'fa-sort': column != 'price', 'fa-sort-asc': (column == 'price' && isDesc), 'fa-sort-desc': (column == 'price' && !isDesc) }"
@@ -52,7 +53,7 @@
                 <th>Options</th>
               </thead>
               <tbody *ngIf="products.length">
-                <tr *ngFor="let product of products | searchCategory: searchText | orderBy: {property: column, direction: direction} | filterby: {term: catName,products: products}">
+                <tr *ngFor="let product of products | searchCategory: searchText | orderBy: {property: column, direction: direction, categories: categories} | filterby: {term: catName,products: products}">
                   <td>{{ product.name }} </td>
                   <td>{{ product.categoryId | category: categories }}</td>
                   <td>{{ product.price | currency : {currencyFormat: currency, currencyValue: currencyValue} }}</td>

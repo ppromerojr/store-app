@@ -1,4 +1,3 @@
-import { AdminProductsComponent } from './../pages/admin-products/admin-products.component';
 import { SharedService } from './../providers/shared.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 
@@ -25,8 +24,10 @@ export class NavComponent implements OnInit {
 
   _changeCurrency() {
     //  $ = false
-    let currency = this.checkbox.nativeElement.checked
-    return (currency) ? 'PH' : 'US';
+    let currency = this.checkbox.nativeElement.checked;
+    currency = (currency) ? 'US' : 'PH';
+    console.log(currency);
+
   }
 
 }
