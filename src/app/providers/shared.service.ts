@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 export class SharedService {
 
@@ -9,11 +10,25 @@ export class SharedService {
     private _http: Http
   ) { }
 
+
   apiURL = 'http://localhost:8080/';
 
   _currentUser() {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
+
+
+  // Observable navItem source
+  private _navItemSource = new BehaviorSubject<number>(0);
+
+  // Observable navItem stream
+  navItem = this._navItemSource.asObservable();
+
+  // service command
+  _changeNav(number) {
+    this._navItemSource.next(number);
+  }
+
 
   _postData(formData, type) {
     formData = JSON.stringify(formData);
@@ -58,6 +73,10 @@ export class SharedService {
 
   logout() {
     localStorage.removeItem('currentUser');
+  }
+
+  _testFunction() {
+    return localStorage.getItem('currency');
   }
 
 

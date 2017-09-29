@@ -1,3 +1,5 @@
+import { AdminProductsComponent } from './../admin-products/admin-products.component';
+import { ProductsComponent } from './../products/products.component';
 import { Icategory } from './../../providers/icategory';
 import { SharedService } from './../../providers/shared.service';
 import { Iproduct } from './../../providers/iproduct';
@@ -13,7 +15,8 @@ export class AdminEditProductComponent implements OnInit {
   @ViewChild('close') close: ElementRef;
 
   constructor(
-    private shared: SharedService
+    private shared: SharedService,
+    private products: AdminProductsComponent
   ) { }
 
   categories: Icategory[] = [{
@@ -39,11 +42,14 @@ export class AdminEditProductComponent implements OnInit {
         console.log(res);
       })
   }
+
+
   _updateForm() {
     console.log(this.prod);
     this.shared._putData(this.prod, 'products')
       .subscribe((res) => {
         this._close();
+        this.products._getProducts();
       });
     this.isModal = false;
   }

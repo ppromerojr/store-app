@@ -22,55 +22,60 @@
                 <strong>Oops!</strong> It's lonely here.
               </div>
             </div>
+            <form [formGroup]="productForm" novalidate>
+              <table *ngIf="categories.length" class="table table-hover table-striped">
+                <thead>
+                  <th>Category</th>
+                  <th width="20%">Options</th>
+                </thead>
+                <tbody *ngIf="categories.length">
 
-            <table *ngIf="categories.length" class="table table-hover table-striped">
-              <thead>
-                <th>Category</th>
-                <th width="20%">Options</th>
-              </thead>
-              <tbody *ngIf="categories.length">
-                <tr *ngFor="let category of categories; let i = index">
-                  <td (dblclick)="_editCategory(category); selectedCategory=category.id">
-                    <span *ngIf="category.id != selectedCategory && category.id">{{ category.name }}</span>
-                    <span *ngIf="category.id == selectedCategory || (!category.id && isAdd)">
-                     <form #newCategory="ngForm" novalidate>
-                        <input 
-                        (blur)="_removeFocus()" 
+                  <tr *ngFor="let category of categories; let i = index">
+                    <td (dblclick)="_editCategory(category); selCategory=category; selectedCategory=category.id">
+                      <span *ngIf="category.id != selectedCategory && category.id">{{ category.name }}</span>
+                      <span *ngIf="category.id == selectedCategory || (!category.id && isAdd)">
+                    
+                        <input  
                         name="name"   
-                        [(ngModel)]="category.name" 
+                        formControlName="name"
                         type="text" 
                         class="form-control" 
                         [value]="category.name" 
                         autofocus
-                        required
                         autocomplete="off"
-                        placeholder="Category Name"
+                        placeholder="Category Name" 
                         >
-                     </form>
+                    
                     </span>
-                  </td>
-                  <td>
+                    </td>
+                    <td>
 
-                    <!-- New -->
-                    <div *ngIf="!category.id">
-                      <button (click)="_addProduct(category)" class="btn btn-success">  <i class="pe-7s-check" title="Save"></i>   </button>
-                      <button (click)="_cancelCategory()" class="btn btn-danger">  <i class="pe-7s-close" title="Cancel"></i></button>
-                    </div>
+                      <!-- New -->
+                      <div *ngIf="!category.id">
+                        <button (click)="_addProduct(productForm.value)" [disabled]="productForm.invalid" class="btn btn-success">  <i class="pe-7s-check" title="Save"></i>   </button>
+                        <button (click)="_cancelCategory()" class="btn btn-danger">  <i class="pe-7s-close" title="Cancel"></i></button>
+                      </div>
 
-                    <!-- Edit -->
-                    <div *ngIf="category.id">
-                      <button [ngClass]="{'fade-out' : category.id == selectedCategory}" (click)="_editCategory(category)" class="btn btn-primary">  <i class="pe-7s-edit" title="Edit"></i>   </button>
+                      <!-- Edit -->
+                      <div *ngIf="category.id">
+                        <button [ngClass]="{'fade-out' : category.id == selectedCategory}" (click)="_editCategory(category)" class="btn btn-primary">  <i class="pe-7s-edit" title="Edit"></i>   </button>
 
-                      <button [ngClass]="{'fade-in' : category.id == selectedCategory}" (click)="_updateCategory(category)" class="btn btn-success hidden">  <i class="pe-7s-check" title="Save"></i>   </button>
+                        <button [ngClass]="{'fade-in' : category.id == selectedCategory}" (click)="_updateCategory(productForm.value)" class="btn btn-success hidden">  <i class="pe-7s-check" title="Save"></i>   </button>
 
-                      <button (click)="selectedCategory=category" class="btn btn-danger" data-toggle="modal" data-target=".confirmation"> <i class="pe-7s-trash" title="Remove"></i> </button>
-                    </div>
+                        <button [ngClass]="{'fade-in' : category.id == selectedCategory}" (click)="_cancelCategory(); selectedCategory = 0" class="btn btn-danger hidden">  <i class="pe-7s-close " title="Cancel"></i></button>
+
+                        <button [ngClass]="{'fade-out' : category.id == selectedCategory}" (click)="selectedCategory=category" class="btn btn-danger"
+                          data-toggle="modal" data-target=".confirmation"> <i class="pe-7s-trash" title="Remove"></i> </button>
 
 
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                      </div>
+
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
 
           </div>
         </div>

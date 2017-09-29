@@ -168,7 +168,7 @@
   position: relative;
   width: 120px;
   height: 50px;
-  background: #d21626;
+  background: #1f77d0;
   border-radius: 5px;
   -webkit-transition: all 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
   transition: all 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
@@ -187,7 +187,7 @@
 .toggle:before {
   content: "$";
   left: 20px;
-  color: #D21626;
+  color: #1f77d0;
 }
 
 .toggle:after {
@@ -213,7 +213,7 @@
 }
 
 input:checked+.toggle {
-  background: #66b317;
+  background: #1f77d0;
 }
 
 input:checked+.toggle:before {
@@ -221,7 +221,7 @@ input:checked+.toggle:before {
 }
 
 input:checked+.toggle:after {
-  color: #66b317;
+  color: #1f77d0;
 }
 
 input:checked+.toggle .toggle__handler {
@@ -244,7 +244,7 @@ input:checked+.toggle .toggle__handler {
 }
 
 input.form-control.ng-touched.ng-invalid {
-  border: 2px solid #F00;
+  /* border: 2px solid #F00; */
 }
 
 input.form-control.ng-touched.ng-valid {
@@ -271,4 +271,67 @@ input.form-control.ng-touched.ng-valid {
 
 .fade-out {
   display: none !important;
+}
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+.CustomButton {
+  float: right;
+  position: absolute;
+  right: 40px;
+  top: 20px;
+}
+
+.CustomButton .dropdown-menu {
+  right: 0;
+  left: inherit;
+}
+
+.CustomButton .dropdown-menu a.dropdown-item {
+  display: block;
+  padding: 15px;
+  color: #373737;
+  cursor: pointer;
+}
+
+.CustomButton .dropdown-menu a.dropdown-item:hover {
+  font-weight: bold;
+}
+
+.CustomButton .dropdown-menu {
+  margin-top: 10px;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.32);
+  background: rgb(255, 255, 255);
+  border: 0;
+  border-radius: 10px;
+}
+
+th {
+  cursor: pointer;
+}
+
+.form-group em {
+  float: right;
+  color: #F00;
 }

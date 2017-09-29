@@ -6,8 +6,6 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class AuthService {
 
-
-
   constructor(
     private _http: Http,
     private shared: SharedService
@@ -19,7 +17,6 @@ export class AuthService {
   authenticateUser() {
     if (localStorage.getItem('currentUser'))
       return true;
-    return false;
   }
 
   currentUser() {

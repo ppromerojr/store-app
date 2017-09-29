@@ -1,48 +1,63 @@
 <div class="modal fade" id="add-product" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">New Product </h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <form (ngSubmit)="_addProduct(productForm.value)" [formGroup]="productForm" autocomplete="off" novalidate>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">New Product </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
-      </div>
-      <div class="modal-body">
-        <form name="form" #addProduct="ngForm" novalidate>
+        </div>
+        <div class="modal-body">
 
+          <!-- Name -->
           <div class="form-group">
             <label for="product-name" class="form-control-label">Name</label>
-            <input name="name" [(ngModel)]="productData.name" type="text" class="form-control" id="product-name">
+            <em *ngIf="_validateName() && productForm.controls.name.errors.required">*Required</em>
+            <input formControlName="name" id="name" type="text" class="form-control" placeholder="product name" />
           </div>
+
+          <!-- Category -->
           <div class="form-group">
             <label for="product-category" class="form-control-label">Category </label>
-            <select [(ngModel)]="productData.categoryId" name="product-category" class="form-control" *ngIf="categories.length">
-                    <option value=""></option>
-                    <option [value]="category.id" *ngFor="let category of categories" >{{category.name}}</option>
-                    </select>
+            <em *ngIf="_validateCategory() && productForm.controls.categoryId.errors.required">*Required</em>
+            <select formControlName="categoryId" class="form-control" *ngIf="categories.length">
+              <option value=""></option>
+              <option [value]="category.id" *ngFor="let category of categories" >{{category.name}}</option>
+            </select>
           </div>
 
+          <!-- Price -->
           <div class="form-group">
             <label for="product-price" class="form-control-label">Price</label>
-            <input name="product-price" [(ngModel)]="productData.price" type="text" class="form-control" id="product-price">
+            <em *ngIf="_validatePrice() && productForm.controls.price.errors.required">*Required</em>
+            <em *ngIf="_validatePrice() && productForm.controls.price.errors.pattern">Must be in a currency format</em>
+            <input type="text" formControlName="price" class="form-control" id="product-price" placeholder="price">
           </div>
+
+          <!-- Available Stocks -->
           <div class="form-group">
             <label for="product-stocks" class="form-control-label">Available Stocks</label>
-            <input name="product-stocks" [(ngModel)]="productData.stocks" type="text" class="form-control" id="product-stocks">
+
+            <em *ngIf="_validateStocks() && productForm.controls.stocks.errors.required">*Required</em>
+            <em *ngIf="_validateStocks() && productForm.controls.stocks.errors.pattern">Must be a number</em>
+            <input type="text" formControlName="stocks" class="form-control" id="product-stocks" placeholder="stocks">
           </div>
 
+          <!-- Image URL -->
           <div class="form-group">
             <label for="product-url" class="form-control-label">Image URL</label>
-            <input name="product-url" [(ngModel)]="productData.imageUrl" type="text" class="form-control" id="product-url">
+            <em *ngIf="_validateURL() && productForm.controls.imageUrl.errors.required">*Required</em>
+            <em *ngIf="_validateURL() && productForm.controls.imageUrl.errors.pattern">Must be in a URL format</em>
+            <input type="text" formControlName="imageUrl" class="form-control" id="product-url" placeholder="url">
           </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        {{ isSucess }}
-        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="_addProduct();">Add</button>
-      </div>
-    </div>
 
+        </div>
+        <div class="modal-footer">
+          <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button [disabled]="productForm.invalid" type="submit" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
