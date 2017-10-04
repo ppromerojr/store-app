@@ -1,7 +1,7 @@
 <div class="wrapper wrapper-full-page ">
   <div class="main-panel">
     <app-nav *ngIf="auth.authenticateUser()"></app-nav>
-    <router-outlet (onNewEntryAdded)="_changeCurrency($event)"></router-outlet>
+    <router-outlet (search)="searchTerm($event)"></router-outlet>
     <app-footer *ngIf="auth.authenticateUser()"></app-footer>
 
   </div>

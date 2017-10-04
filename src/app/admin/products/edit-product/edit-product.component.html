@@ -1,0 +1,70 @@
+<div data-backdrop="static" data-keyboard="false" class="modal fade" id="edit-product" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div *ngIf="prod" class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">{{ (prod.name) ? prod.name : 'Edit Product' }}</h3>
+
+      </div>
+      <div class="modal-body">
+        <form name="form" #editProduct="ngForm" novalidate>
+          <div class="row">
+            <div class="col-lg-12">
+              <!-- Name -->
+              <div class="form-group">
+                <label for="product-name" class="form-control-label">Name</label>
+                <input name="product-name" [(ngModel)]="prod.name" [value]="prod.name" type="text" class="form-control" id="product-name">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-5">
+              <div class="img_thumb">
+                <img [src]="(prod.imageUrl) ? prod.imageUrl : defaultImage" alt="">
+              </div>
+            </div>
+
+            <div class="col-lg-7">
+              <!-- Category -->
+              <div class="form-group">
+                <label for="product-category" class="form-control-label">Category - {{ prod.categoryId }}</label>
+                <select [(ngModel)]="prod.categoryId" name="product-category" class="form-control" *ngIf="categories">
+          <option value=""></option>
+          <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+          </select>
+              </div>
+
+              <!-- Price -->
+              <div class="form-group">
+                <label for="product-price" class="form-control-label">Price</label>
+                <input name="product-price" [(ngModel)]="prod.price" [value]="prod.price" type="text" class="form-control" id="product-price">
+              </div>
+
+              <!-- Stocks -->
+              <div class="form-group">
+                <label for="product-stocks" class="form-control-label">Available Stocks</label>
+                <input name="product-stocks" [(ngModel)]="prod.stocks" [value]="prod.stocks" type="text" class="form-control" id="product-stocks">
+              </div>
+
+              <!-- Image URL -->
+              <div class="form-group">
+                <label for="product-url" class="form-control-label">Image URL</label>
+                <input name="product-url" [(ngModel)]="prod.imageUrl" [value]="prod.imageUrl" type="text" class="form-control" id="product-url">
+              </div>
+
+            </div>
+          </div>
+
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateForm()">Update</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- [ngClass]="{'in': isModal}" [ngStyle]="{'display': visible ? 'block' : 'none', 'opacity': isModal ? true : false}" -->

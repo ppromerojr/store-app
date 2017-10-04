@@ -1,5 +1,20 @@
 .fixed-bottom {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  z-index: 99999;
+}
+
+.footer {
+  box-shadow: 1px -2px 20px rgba(204, 204, 204, 0.34);
+  background-color: rgba(255, 255, 255, 0.80);
+  line-height: 20px;
+  border-top: 1px solid #CCC;
+}
+
+.footer .copyright {
+  color: #484848;
+  font-weight: 800;
+  font-size: 15px;
+  padding: 5px 10px;
 }

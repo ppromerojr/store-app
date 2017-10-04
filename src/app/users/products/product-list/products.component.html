@@ -1,0 +1,92 @@
+<div class="content container product-container animate-fade-up">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-8" (click)="sortBy('name')" [class.active]="sortBy === 'name'">
+                    Categories
+                    <!-- <i class="fa" 
+              [ngClass]="{'
+                  fa-sort': column != 'name', 
+                  'fa-sort-asc': (column == 'name' && !isDesc), 
+                  'fa-sort-desc': (column == 'name' && isDesc) }"
+          aria-hidden="true"> </i> -->
+                </div>
+                <div class="col-xs-2 text-center" (click)="sort('totalProducts')">
+                    Total Products
+                    <!-- <i class="fa" 
+            [ngClass]="{'fa-sort': column != 'totalProducts', 
+                                'fa-sort-asc': (column == 'totalProducts' && !isDesc), 
+                                'fa-sort-desc': (column == 'totalProducts' && isDesc) }"
+            aria-hidden="true"> </i>   -->
+                </div>
+                <div class="col-xs-2 text-center" (click)="expandAll()">
+                    <span *ngIf="!isExpandAll">Expand All</span>
+                    <span *ngIf="isExpandAll">Hide All</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="categories" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <div class="card" *ngFor="let category of categories">
+            <div class="card-header" role="tab" id="headingTwo">
+                <div class="row">
+                    <div class="col-xs-8"><a [routerLink]="['/categories', category.id]">{{category.name}}</a></div>
+                    <div *ngIf="category.products" class="col-xs-2 text-center">{{category.products.length}}</div>
+                    <div class="col-xs-2 text-center">
+                        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapse{{category.id}}" aria-expanded="false" aria-controls="collapseTwo" (click)="toggleThis(category.id)">
+                            <i *ngIf="!isExpandAll" class="fa fa-caret-down" aria-hidden="true"></i>
+                            <i *ngIf="isExpandAll" class="fa fa-caret-up" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div id="collapse{{category.id}}" class="collapse" [ngClass]="{
+                    'in': (isExpandAll) }" role="tabpanel" aria-labelledby="headingTwo">
+                <div class="card-block">
+                    <div class="panel-body">
+                        <div *ngIf="category.products && category.products.length > 0">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th (click)="sortProduct('name')">
+                                            Product Name
+                                            <i class="fa" [ngClass]="{'
+                                fa-sort': column != 'name', 
+                                'fa-sort-asc': (column == 'name' && !isDesc), 
+                                'fa-sort-desc': (column == 'name' && isDesc) }" aria-hidden="true"> </i>
+                                        </th>
+                                        <th>
+                                            Price
+                                            <i class="fa" [ngClass]="{'
+                            fa-sort': column != 'price', 
+                            'fa-sort-asc': (column == 'price' && !isDesc), 
+                            'fa-sort-desc': (column == 'price' && isDesc) }" aria-hidden="true"> </i>
+                                        </th>
+                                        <th>
+                                            Stock Available
+                                            <i class="fa" [ngClass]="{'
+                            fa-sort': column != 'price', 
+                            'fa-sort-asc': (column == 'price' && !isDesc), 
+                            'fa-sort-desc': (column == 'price' && isDesc) }" aria-hidden="true"> </i>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let product of category.products">
+                                        <td><a [routerLink]="['/products', product.id]">{{product?.name}}</a></td>
+                                        <td>{{product?.price | changeCurrency : {currencyFormat: currency, currencyValue: currencyValue} }}</td>
+                                        <td>{{product?.stocks}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div *ngIf="category.products && category.products.length === 0">
+                            <h4 class="text-center">No Available Products</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

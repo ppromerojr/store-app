@@ -1,0 +1,53 @@
+<div class="content animate-fade-up">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Edit User</h4>
+
+          </div>
+          <div *ngIf="currentUser" class="content">
+            <form>
+              <div class="form-group">
+                <label for="formGroupExampleInput">First Name</label>
+                <input [value]="currentUser.firstName" type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Last Name</label>
+                <input [value]="currentUser.lastName" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Username</label>
+                <input [value]="currentUser.username" type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">User Type</label>
+                <select name="" class="form-control" id="">
+                    <option value=""></option>
+                    <option value="true" [selected]="(currentUser.isAdmin) && 'selected' ">Administrator</option>
+                    <option value="false" [selected]="(!currentUser.isAdmin) && 'selected' ">Standard User</option>
+                </select>
+              </div>
+              <div class="row">
+                <hr>
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Password</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput2">Confirm Password</label>
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+              </div>
+              <div class="form-group">
+                <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Update</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

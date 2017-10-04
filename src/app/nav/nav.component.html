@@ -1,67 +1,70 @@
 <nav class="navbar navbar-default navbar-fixed">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
                       <span class="sr-only">Toggle navigation</span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                   </button>
-      <a [routerLink]="['/dashboard']" class="navbar-brand">MyStore</a>
-    </div>
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-left">
-        <li>
-          <a [routerLink]="['/products']">
-                   All Products
+            <a [routerLink]="['']" class="navbar-brand">iStore</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li>
+                    <a [routerLink]="['/products']">
+                   All Products  
                 </a>
-        </li>
-        <li class="dropdown" *ngIf="shared._currentUser().isAdmin">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                </li>
+                <li class="dropdown" *ngIf="isAdmin()">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                         Manage Store
                         <b class="caret"></b>
                   </a>
-          <ul class="dropdown-menu">
-            <li><a [routerLink]="['/categories/manage']">Categories</a></li>
-            <li><a [routerLink]="['/products/manage']">Products</a></li>
-          </ul>
-        </li>
+                    <ul class="dropdown-menu">
+                        <li><a [routerLink]="['/categories/manage']">Categories</a></li>
+                        <li><a [routerLink]="['/products/manage']">Products</a></li>
+                        <li><a [routerLink]="['/users']">Users</a></li>
+                    </ul>
+                </li>
 
 
-      </ul>
+            </ul>
 
 
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a [ngClass]="{'fade-out' : isSearch}" (click)="isSearch=true">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <!-- <a [ngClass]="{'fade-out' : isSearch}" (click)="isSearch=true">
                      <i class="fa fa-search"></i>
-                 </a>
-          <span [ngClass]="{'fade-in' : isSearch}" class="input-search" *ngIf="isSearch">
-              <input (blur)="toggleSearchIcon()" autofocus type="text" class="form-control" placeholder="product">
+                 </a> -->
+                    <span class="input-search">
+              <input (keyup)="searchTerm()" [(ngModel)]="terms"   type="text" class="search form-control" placeholder="product">
           </span>
-        </li>
-        <li>
-          <div class="toggleWrapper">
-            <input #checkbox type="checkbox" id="dn" class="dn">
-            <label (click)="_changeCurrency()" for="dn" class="toggle"><span class="toggle__handler"></span></label>
-          </div>
+                </li>
+                <li>
+                    <!-- <button class="btn btn-primary" (click)="_changeCurrency(0)">US</button>
+          <button class="btn btn-primary" (click)="_changeCurrency(1)">PH</button> -->
+                    <div class="toggleWrapper">
+                        <input [checked]="getCurrency() == 'PH'" #checkbox (click)="toggleCurrency()" type="checkbox" id="dn" class="dn">
+                        <label for="dn" class="toggle"><span class="toggle__handler"></span></label>
+                    </div>
 
-        </li>
+                </li>
 
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            Welcome <strong>{{ shared._currentUser().username }}</strong>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            Welcome <span class="nav_username"><strong>{{ shared.currentUser().username }}</strong></span>
             <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Edit Profile</a></li>
+                    <ul class="dropdown-menu">
+                        <li><a [routerLink]="['/users', userID ]">Edit Profile</a></li>
 
-            <li class="divider"></li>
-            <li><a [routerLink]="['/login']">Logout</a></li>
-          </ul>
-        </li>
+                        <li class="divider"></li>
+                        <li><a [routerLink]="['/login']">Logout</a></li>
+                    </ul>
+                </li>
 
-      </ul>
+            </ul>
+        </div>
     </div>
-  </div>
 </nav>

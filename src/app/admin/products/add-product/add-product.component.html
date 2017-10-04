@@ -1,0 +1,72 @@
+<form (ngSubmit)="addProduct(productForm.value)" [formGroup]="productForm" autocomplete="off" novalidate>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+      <!-- Name -->
+      <div class="form-group">
+        <label for="product-name" class="form-control-label">Name</label>
+        <em *ngIf="validateName() && productForm.controls.name.errors.required">*Required</em>
+        <input [(ngModel)]="product_name" formControlName="name" id="name" type="text" class="form-control" placeholder="product name"
+        />
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-5">
+      <div class="img_thumb">
+        <img [src]="(image_url) ? image_url : defaultImage" alt="">
+      </div>
+    </div>
+
+    <div class="col-lg-7">
+      <!-- Category -->
+      <div class="form-group">
+        <label for="product-category" class="form-control-label">Category </label>
+        <em *ngIf="validateCategory() && productForm.controls.categoryId.errors.required">*Required</em>
+        <select formControlName="categoryId" class="form-control" *ngIf="categories">
+                  <option value=""></option>
+                  <option [value]="category.id" *ngFor="let category of categories" >{{category.name}}</option>
+                </select>
+      </div>
+
+      <!-- Price -->
+      <div class="form-group">
+        <label for="product-price" class="form-control-label">Price</label>
+        <em *ngIf="validatePrice() && productForm.controls.price.errors.required">*Required</em>
+        <em *ngIf="validatePrice() && productForm.controls.price.errors.pattern">Must be in a currency format</em>
+        <input type="text" formControlName="price" class="form-control" id="product-price" placeholder="price">
+      </div>
+
+      <!-- Available Stocks -->
+      <div class="form-group">
+        <label for="product-stocks" class="form-control-label">Available Stocks</label>
+
+        <em *ngIf="validateStocks() && productForm.controls.stocks.errors.required">*Required</em>
+        <em *ngIf="validateStocks() && productForm.controls.stocks.errors.pattern">Must be a number</em>
+        <input type="text" formControlName="stocks" class="form-control" id="product-stocks" placeholder="stocks">
+      </div>
+
+      <!-- Image URL -->
+      <div class="form-group">
+        <label for="product-url" class="form-control-label">Image URL</label>
+        <em *ngIf="validateURL() && productForm.controls.imageUrl.errors.required">*Required</em>
+        <em *ngIf="validateURL() && productForm.controls.imageUrl.errors.pattern">Must be in a URL format</em>
+        <input [(ngModel)]="image_url" type="text" formControlName="imageUrl" class="form-control" id="product-url" placeholder="url">
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+
+  <div class="modal-footer">
+    <button (click)="cancelModal()" #close type="button" class="btn btn-secondary">Close</button>
+    <button [disabled]="productForm.invalid" type="submit" class="btn btn-primary">Add</button>
+  </div>
+
+</form>

@@ -1,0 +1,77 @@
+<div class="content animate-fade-up">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class=" ">
+
+          <div class="content table-responsive table-full-width search-results">
+            <div *ngIf="(searchTerms != 'term' && searchTerms != '')" class="  animate-fade-up">
+              <h4 class="results title">Search Results</h4>
+              <p class="category">keyword: {{ searchTerms }}</p>
+
+            </div>
+
+            <div *ngFor="let category of visibleProducts" class="animate-fade-up ">
+
+              <div *ngIf="category.products.length" class="row categories">
+                <div class="col-lg-12">
+                  <h2 class="category_title animate-fade-up"> {{ category.name }}</h2>
+
+                  <div class="categories_count"> {{ category.products.length }} {{ (category.products.length != 1) ? 'Products' : 'Product' }}</div>
+                </div>
+              </div>
+
+              <div>
+
+                <div>
+                  <div class="row">
+                    <div class="col-md-3 animate-fade-up" *ngFor="let product of category.products let i = index">
+
+                      <div [routerLink]="['/products', product.id]" class="item_wrapper">
+                        <div class="item-holder">
+                          <div class="img-holder">
+                            <img [src]="product?.imageUrl" alt="">
+                          </div>
+                          <div class="product_details">
+                            <div class="max_lines">
+                              <h3 class="product_title"><a [routerLink]="['/products', product.id]">{{product?.name}}</a></h3>
+                            </div>
+
+                            <div class="product_price">{{product?.price | changeCurrency : {currencyFormat: currency, currencyValue: currencyValue}
+                              }}
+                            </div>
+                            <div class="product_stocks">{{product?.stocks}} {{ (product.stocks != 1) ? 'stocks' : 'stock' }}</div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+            </div>
+
+
+
+            <!-- <div class="row">
+              <div class="col-md-6 col-md-offset-3 text-center">
+                <br>
+                <h4>Oops, No match found</h4>
+                <p><img src="https://cdn3.iconfinder.com/data/icons/tango-icon-library/48/camera-photo-128.png" alt=""></p>
+
+              </div>
+
+            </div> -->
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

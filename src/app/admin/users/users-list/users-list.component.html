@@ -1,0 +1,101 @@
+<div class="content animate-fade-up">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h4 class="title">Users</h4>
+            <p class="category">List of Users</p>
+            <!-- 
+            <div class="form-group">
+              <div class="col-md-6">
+                <input type="text" [(ngModel)]="searchText" class="form-control" placeholder="Search By Category" />
+              </div>
+            </div> -->
+
+
+          </div>
+          <div class="content table-responsive table-full-width">
+
+
+            <div class="floating-button">
+              <button (click)="isModal = true" type="button" class="btn btn-primary" data-toggle="modal" data-target="#add-user">
+                    <i class="pe-7s-plus"></i>
+                  </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+              <table *ngIf="AllUsers" class="table table-hover table-striped">
+                <thead>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Username</th>
+                  <th>Type</th>
+                  <th>Options</th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let user of AllUsers">
+                    <td>{{ user.firstName }} </td>
+                    <td>{{ user.lastName }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ (user.isAdmin) ? 'Administrator' : 'Standard User' }}</td>
+                    <td>
+
+                      <button (click)="isModal=true; selectedProduct=product" type="button" class="btn btn-primary" data-toggle="modal" data-target="#edit-product">
+                            <i class="pe-7s-edit"></i>
+                          </button>
+
+
+                      <button (click)="selectedProduct=product" class="btn btn-danger" data-toggle="modal" data-target=".bd-example-modal-lg"> <i class="pe-7s-trash" title="Remove"></i> </button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!users">
+                    <td colspan="5">
+                      <div class="content">
+                        <div *ngIf="products" class="alert alert-warning" role="alert">
+                          <strong>Oops!</strong> It's lonely here.
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Are you sure you want to remove this?</p>
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+        <button type="button" class="btn btn-primary" (click)="_removeProduct(i)">Yes</button>
+      </div>
+
+
+    </div>
+  </div>
+</div> -->
+
+<div *ngIf="isModal">
+  <!-- <app-admin-edit-product [prod]="selectedProduct"></app-admin-edit-product> -->
+  <app-add-user></app-add-user>
+</div>

@@ -1,0 +1,25 @@
+<div class="content container product-container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- {{category.name}} -->
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="item-holder">
+                        <div class="img-holder">
+                            <img [src]="currentProduct?.imageUrl" alt="">
+                        </div>
+                        <h3>{{currentProduct?.name}}</h3>
+                        <b>{{currentProduct?.price | currency : {currencyFormat: currency, currencyValue: currencyValue} }}</b>
+                        <p>{{currentProduct?.stocks}} Stocks Available</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
